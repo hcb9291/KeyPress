@@ -16,7 +16,7 @@
 # 版本:   见下面的 __version__（发布新版时改这一处即可）
 
 # 程序版本号：窗口标题、界面横幅、--version 输出都用它。
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 import ctypes
 import ctypes.wintypes as wintypes

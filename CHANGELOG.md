@@ -6,6 +6,26 @@
 
 ## [未发布]
 
+## [1.0.1] - 2026-10-01
+
+文档与资源更新，程序功能与 1.0.0 相同。
+
+### 新增
+
+- 完整英文版说明 `README.en.md`，中英文两份 README 之间互相加了切换链接；
+- `assets/screenshot.png`：界面截图，用在 README 里；
+- `assets/social_preview.png`：1280×640 的社交分享预览图（别人分享仓库链接时显示）；
+- `tools/selfcheck.py` 支持用 `--patterns` 参数指定额外的私有关键词文件。
+
+### 修复
+
+- 自检脚本在非 UTF-8 控制台（比如 GitHub Actions 的 Windows 运行器）下打印中文会直接崩溃；
+  现在脚本内部强制使用 UTF-8 输出，两个工作流也统一设置了 `PYTHONUTF8=1`。
+
+### 变更
+
+- 仓库地址由 `KeyPress` 更名为 `KeyPresser`（GitHub 会保留旧地址跳转）。
+
 ## [1.0.0] - 2026-10-01
 
 第一个公开版本。
@@ -35,5 +55,6 @@
 - 设置与录制的语音存放在 `%APPDATA%\KeyPresser\`，程序目录不产生任何运行期文件。
 - 仅支持 Windows 10 / 11。
 
-[未发布]: https://github.com/hcb9291/KeyPress/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/hcb9291/KeyPress/releases/tag/v1.0.0
+[未发布]: https://github.com/hcb9291/KeyPresser/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/hcb9291/KeyPresser/releases/tag/v1.0.1
+[1.0.0]: https://github.com/hcb9291/KeyPresser/releases/tag/v1.0.0

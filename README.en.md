@@ -6,9 +6,9 @@
 ![python](https://img.shields.io/badge/python-3.8%2B-3776AB)
 ![dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
 ![license](https://img.shields.io/badge/license-MIT-green)
-![version](https://img.shields.io/badge/version-1.0.0-blue)
+![version](https://img.shields.io/badge/version-1.0.1-blue)
 
-![CI](https://github.com/hcb9291/KeyPress/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/hcb9291/KeyPresser/actions/workflows/ci.yml/badge.svg)
 
 **English** | [简体中文](README.md)
 
@@ -35,7 +35,7 @@ anywhere.
 ### Option 1 — prebuilt exe (recommended for non-developers)
 
 Download `KeyPresser.exe` from the
-[Releases](https://github.com/hcb9291/KeyPress/releases) page and double-click it.
+[Releases](https://github.com/hcb9291/KeyPresser/releases) page and double-click it.
 **Python is not required.**
 
 The exe is not code-signed, so Windows SmartScreen may show "unknown publisher"

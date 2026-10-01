@@ -20,7 +20,7 @@
 
 ## 二、第一次上 GitHub（本仓库已完成，留作记录）
 
-> 本项目已经初始化好仓库并推送到 **https://github.com/hcb9291/KeyPress**，
+> 本项目已经初始化好仓库并推送到 **https://github.com/hcb9291/KeyPresser**，
 > 下面这些步骤换台机器、或者要重建仓库时照着做就行。
 
 ### 1. 仓库地址出现在哪些地方
@@ -58,7 +58,7 @@ git status
 
 ```bat
 git commit -m "chore: 初始提交，KeyPresser 1.0.0"
-git remote add origin https://github.com/hcb9291/KeyPress.git
+git remote add origin https://github.com/hcb9291/KeyPresser.git
 git push -u origin main
 ```
 

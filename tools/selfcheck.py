@@ -14,6 +14,7 @@
 只依赖标准库。有硬性问题时以非 0 退出码结束；占位符之类的只提醒，不算失败。
 """
 
+import argparse
 import ast
 import json
 import os
@@ -122,25 +123,34 @@ def rel(path):
     return os.path.relpath(path, ROOT).replace("\\", "/")
 
 
-def local_patterns():
-    """本地私有关键词：`.private/private-patterns.txt`，一行一个正则，# 开头是注释。
+def local_patterns(extra_files=()):
+    """本地私有关键词：一行一个正则，# 开头是注释。
 
-    这个文件不进仓库，方便各自加上自己的邮箱、账号、本机目录名等。
+    默认读仓库里的 `.private/private-patterns.txt`（存在才读），也可以用
+    `--patterns 文件路径` 指定放在项目外面的关键词文件 —— 这样邮箱、账号、
+    本机目录名这类私有关键词可以完全不放进项目目录。
     """
-    path = os.path.join(ROOT, LOCAL_PATTERNS_FILE)
-    if not os.path.exists(path):
-        return []
+    paths = []
+    inside = os.path.join(ROOT, LOCAL_PATTERNS_FILE)
+    if os.path.exists(inside):
+        paths.append(inside)
+    paths.extend(extra_files)
+
     found = []
-    for line in read(path).splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
+    for path in paths:
+        if not os.path.exists(path):
+            warn("关键词文件不存在，已跳过：%s" % path)
             continue
-        try:
-            re.compile(line)
-        except re.error as exc:
-            warn("%s 里的正则写错了，已跳过：%s（%s）" % (LOCAL_PATTERNS_FILE, line, exc))
-            continue
-        found.append((line, "本地私有关键词"))
+        for line in read(path).splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            try:
+                re.compile(line)
+            except re.error as exc:
+                warn("%s 里的正则写错了，已跳过：%s（%s）" % (path, line, exc))
+                continue
+            found.append((line, "本地私有关键词"))
     return found
 
 
@@ -250,8 +260,10 @@ def check_themes(constants):
                  % (a.get("id"), b.get("id")))
 
 
-def check_privacy():
-    rules = tuple(PRIVATE_PATTERNS) + tuple(local_patterns())
+def check_privacy(extra_files=()):
+    """扫描隐私内容，返回实际加载的本地私有关键词条数。"""
+    local = local_patterns(extra_files)
+    rules = tuple(PRIVATE_PATTERNS) + tuple(local)
     patterns = [(re.compile(p, re.IGNORECASE), why) for p, why in rules]
     for path in iter_text_files():
         text = read(path)
@@ -260,6 +272,7 @@ def check_privacy():
                 line = text.count("\n", 0, match.start()) + 1
                 fail("发现不该公开的内容（%s）：%s 第 %d 行"
                      % (why, rel(path), line))
+    return len(local)
 
 
 def check_placeholders():
@@ -269,7 +282,15 @@ def check_placeholders():
              % (PLACEHOLDER, "、".join(sorted(hits))))
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser(
+        description="KeyPresser 项目自检：素材、主题数据、隐私扫描")
+    parser.add_argument(
+        "--patterns", action="append", default=[], metavar="文件",
+        help="额外的私有关键词文件（一行一个正则，可重复指定；"
+             "适用于把关键词放在项目外面的情况）")
+    args = parser.parse_args(argv)
+
     check_required_files()
     check_asset_headers()
 
@@ -282,12 +303,13 @@ def main():
         check_version(constants)
         check_themes(constants)
 
-    check_privacy()
+    local_count = check_privacy(args.patterns)
     check_placeholders()
 
-    print("KeyPresser 自检：必需文件 %d 个、主题 %d 套、提示音 %d 个"
+    print("KeyPresser 自检：必需文件 %d 个、主题 %d 套、提示音 %d 个、"
+          "本地私有关键词 %d 条"
           % (len(REQUIRED_FILES), len(constants.get("BUILTIN_THEMES") or []),
-             len(WAV_FILES)))
+             len(WAV_FILES), local_count))
     for msg in warnings:
         print("  [提醒] %s" % msg)
     for msg in failures:
