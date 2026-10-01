@@ -42,6 +42,7 @@ REQUIRED_FILES = (
     "themes.json",
     "tts_synth.ps1",
     "README.md",
+    "README.en.md",
     "CHANGELOG.md",
     "LICENSE",
     "CONTRIBUTING.md",
@@ -191,8 +192,9 @@ def check_version(constants):
         return
     if not re.match(r"^\d+\.\d+\.\d+$", str(version)):
         fail("版本号格式不对（应该是 主.次.修订）：%s" % version)
-    if "version-%s-" % version not in read(os.path.join(ROOT, "README.md")):
-        fail("README.md 顶部的 version 徽章没有同步成 %s" % version)
+    for name in ("README.md", "README.en.md"):
+        if "version-%s-" % version not in read(os.path.join(ROOT, name)):
+            fail("%s 顶部的 version 徽章没有同步成 %s" % (name, version))
     if "## [%s]" % version not in read(os.path.join(ROOT, "CHANGELOG.md")):
         fail("CHANGELOG.md 里没有 %s 的条目" % version)
 

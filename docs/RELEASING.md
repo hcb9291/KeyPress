@@ -28,7 +28,7 @@
 以后如果改了用户名或仓库名（比如把仓库改名成 `KeyPresser`），下面几处要一起改，
 否则徽章和下载链接会失效：
 
-- `README.md`：CI 徽章、Releases 下载链接（中文区、英文区各一处）；
+- `README.md` / `README.en.md`：CI 徽章、Releases 下载链接（各一处，英文版还有底部的链接）；
 - `CHANGELOG.md`：底部的两个链接；
 - `.github/ISSUE_TEMPLATE/config.yml`：常见问题链接。
 
