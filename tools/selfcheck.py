@@ -20,6 +20,14 @@ import os
 import re
 import sys
 
+# 输出里有中文：Windows 的默认控制台编码可能是 cp936 / cp1252，
+# 那样 print 会直接抛 UnicodeEncodeError 把脚本打断（CI 上就踩过这个坑）。
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SELF = os.path.abspath(__file__)
 

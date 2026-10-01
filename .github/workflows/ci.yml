@@ -10,6 +10,8 @@ jobs:
   check:
     name: 自检 (Python ${{ matrix.python-version }})
     runs-on: windows-latest
+    env:
+      PYTHONUTF8: "1"
     strategy:
       fail-fast: false
       matrix:
