@@ -57,12 +57,14 @@ REQUIRED_FILES = (
     "assets/mascot.png",
     "assets/header.png",
     "assets/screenshot.png",
+    "assets/social_preview.png",
     ".github/workflows/ci.yml",
     ".github/workflows/release.yml",
 )
 
 PNG_FILES = ("assets/icon.png", "assets/icon_512.png",
-             "assets/mascot.png", "assets/header.png", "assets/screenshot.png")
+             "assets/mascot.png", "assets/header.png", "assets/screenshot.png",
+             "assets/social_preview.png")
 WAV_FILES = tuple("sounds/%s_%s.wav" % (timbre, kind)
                   for timbre in ("chime", "soft", "deep")
                   for kind in ("start", "stop"))

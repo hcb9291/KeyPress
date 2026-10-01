@@ -121,6 +121,7 @@ python main.py
 | `assets/mascot.png` | 吉祥物（界面顶部横幅用） |
 | `assets/header.png` | 顶部横幅图（仓库展示用） |
 | `assets/screenshot.png` | 界面截图（就是上面那张） |
+| `assets/social_preview.png` | 分享链接时用的预览图（1280×640，GitHub 的 Social preview 用） |
 | `sounds/*_start.wav` / `*_stop.wav` | 三套内置提示音（chime / soft / deep） |
 | `tools/make_assets.py` | 生成上面这些图标和提示音的脚本 |
 | `tools/selfcheck.py` | 项目自检（素材是否齐全、主题数据是否合法、有没有混进隐私内容） |
