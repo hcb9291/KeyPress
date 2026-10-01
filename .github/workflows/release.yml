@@ -58,7 +58,7 @@ jobs:
           Get-Item dist\KeyPresser.exe | Select-Object Name, Length
 
       - name: 上传到 Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: dist/KeyPresser.exe
           generate_release_notes: true
