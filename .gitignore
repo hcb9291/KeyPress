@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------------
+# KeyPresser .gitignore
+# 原则：只把「程序本体 + 素材 + 文档」放进仓库，其余一律忽略。
+# ---------------------------------------------------------------------------
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- 打包 / 构建产物 ---
+build/
+dist/
+*.spec
+.venv/
+venv/
+env/
+/tcl/
+tcl_path.txt
+
+# --- 本地私有内容（开发记录等，不随仓库发布）---
+.private/
+
+# --- 运行期文件（正常情况下它们会写到 %APPDATA%\KeyPresser\）---
+settings.json
+custom_voice/
+*.log
+
+# --- 编辑器 / 系统 ---
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini

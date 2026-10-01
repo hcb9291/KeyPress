@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 常见问题（README）
+    url: https://github.com/hcb9291/KeyPress#常见问题
+    about: 热键没反应、按键送不进目标程序、导入语音失败……先看看这里

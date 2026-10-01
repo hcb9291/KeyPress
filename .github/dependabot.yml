@@ -1,0 +1,7 @@
+# 让 GitHub 自动提醒 Actions 里的依赖有没有更新
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
